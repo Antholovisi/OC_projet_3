@@ -16,7 +16,6 @@
 body {
   max-width: 1440px;
   min-height: 650px;
-  margin: 0 auto;
   font-family: "Work Sans";
   font-size: 14px;
   background-color: #fffef8;
@@ -59,6 +58,13 @@ nav li {
   font-size: 1.2em;
 }
 
+nav ul li a {
+  text-decoration: none; 
+  color: inherit; 
+}
+.active {
+  font-weight: 600
+}
 li:hover {
   color: #b1663c;
 }
@@ -76,6 +82,11 @@ main {
 form {
   display: flex;
   flex-direction: column;
+}
+
+form button:hover {
+ background-color: #0E2F28;
+ color: white;
 }
 
 h2 {
@@ -96,39 +107,58 @@ label {
   text-align: left;
 }
 
-#login {
+.login {
   width: 33%;
   margin: auto;
 }
 
-#login input {
+.login input {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#login label {
+.login label {
   margin: 2em 0 1em 0;
 }
 
-input[type="submit"] {
+button {
   font-family: "Syne";
   font-weight: 700;
   color: white;
   background-color: #1d6154;
   margin: 2em auto;
   width: 180px;
+  height: 50px;
   text-align: center;
   border-radius: 60px;
 }
 
+.error {
+  color: red;
+}
+
 footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   height: var(--footerHeight);
+  background-color: white;
+}
+
+footer nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
 }
 
 footer nav ul {
-  justify-content: flex-end;
-  padding: 1em 0;
-  background-color: white;
+  list-style-type: none;
+  margin-right: 50px;
+}
+
+footer nav ul li {
+  padding: 20px;
 }
