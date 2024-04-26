@@ -74,19 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // A faire :
 
-// rendre dynamique le bouton "valider" de la modale pour ajout de photo
-// Revoir couleur du bouton "valider" Background color gris et text blanc AVANT l'ajout d'une photo en appercu, une fois que l'appercu de la photo est visible, bouton valider style vert foncé
-// Gerer la méthode post pour ajouter photo
-// gerer le comportement du xmark et left arrow dans modale
+// gerer le comportement de la modale
+// gerer le comportement du xmark et left arrow dans containerModale
 
-// *****************************************************************************************************************************************
+// Faire les commentaires en anglais
 
-// QUESTIONS :
-
-// comportement des differentes manieres de fermeture des modales:
-// -xmark modale 1 et 2 ok pas de problemes
-// -left arrow modale 2 ok pour le retour modale 1
-// -clic en dehors de la modale 1 ok
-// -clic en dehors de la modale 2 ok pour fermeture, mais ko quand on reclic sur "modifier" pour réouvrir la modale 1 on a l'affichage de la modale 2 a la place
-// -si je clic sur "ajouter photo" pour ouvrir modale 2 c'est ok, mais si je clic sur left arrow pour revenir modale 1 et ensuite reclic sur "ajouter photo" ensuite left arrow et xmark ko
-// En gros lors d'un aller-retour d'une modale a l'autre ou de l'index a une modale, KO
