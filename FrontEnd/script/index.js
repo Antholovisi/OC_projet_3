@@ -203,9 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (isLogged()) {
     // Si l'utilisateur est connecté, afficher "logout"
     loginLink.innerHTML = '<a href="#" id="logout">logout</a>';
-    filtersContainer.style.display = "none";
-    const h1Title = document.querySelector(".h2-logo-modifierDiv");
-    h1Title.style.marginBottom = '70px';
     // Ajouter un écouteur d'événement pour la déconnexion
     document.getElementById("logout").addEventListener("click", function () {
       // Supprimer le token d'authentification du stockage local
@@ -245,13 +242,11 @@ document.addEventListener("DOMContentLoaded", function () {
     Xmark.addEventListener("click", function () {
       containerModale.style.display = "none";
       displayWorks();
-      toggleTousButtonStyle(true);
     })
     containerModale.addEventListener("click", (e) => {
       if (e.target === containerModale) {
         containerModale.style.display = "none";
         displayWorks();
-        toggleTousButtonStyle(true);
       }
     })
   }
