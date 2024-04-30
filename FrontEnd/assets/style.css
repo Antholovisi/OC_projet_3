@@ -253,6 +253,10 @@ li:hover {
   flex-direction: column;
 }
 
+input#nameContact {
+  width: auto;
+}
+
 #contact input {
   height: 50px;
   font-size: 1.2em;
@@ -336,8 +340,6 @@ button:hover{
   background-color:#FFFFFF;
   position: relative;
 }
-
-
 
 .xmark-modale2 {
   position: absolute;
@@ -531,7 +533,7 @@ button:hover{
   height: 100%;
 }
 
-.modalAddWork h2{
+#modaleAdd h2{
   padding:60px 0 40px 0;
   font-size: 26px;
   font-weight: 400;

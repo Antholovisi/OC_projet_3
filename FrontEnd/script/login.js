@@ -72,10 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // *****************************************************************************************************************************************
 
-// A faire :
+// Question :
 
-// gerer le comportement de la modale
-// gerer le comportement du xmark et left arrow dans containerModale
-
-// Faire les commentaires en anglais
+// pourquoi la modale 1 est moins grisée que la modale 2 ?
 
