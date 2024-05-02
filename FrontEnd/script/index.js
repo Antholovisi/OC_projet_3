@@ -1,9 +1,11 @@
 // ************************VARIABLES GLOBALES******************************
+
 const gallery = document.querySelector(".gallery");
 const filtersContainer = document.querySelector(".filters");
 let allWorks = [];
 
 // ****************GESTION DE LA RECUPARATION DES WORKS DE L'API****************
+
 async function getWorks() {
   const response = await fetch("http://localhost:5678/api/works");
   allWorks = await response.json();
@@ -11,6 +13,7 @@ async function getWorks() {
 }
 
 // *****************AFFICHAGE DYNAMIQUE DES WORKS DANS LA GALLERIE********************
+
 async function displayWorks(worksToShow = allWorks) {
   gallery.innerHTML = "";
   worksToShow.forEach((work) => {
@@ -27,12 +30,14 @@ async function displayWorks(worksToShow = allWorks) {
 }
 
 // *********************RECUPARATION DU TABLEAU DES CATEGORIES*****************
+
 async function getCategories() {
   const response = await fetch("http://localhost:5678/api/categories");
   return await response.json();
 }
 
 // *************************GESTION DYNAMIQUE DES CATEGORIES***********************
+
 async function displayCategoriesBtn() {
   const arrayCategories = await getCategories();
   arrayCategories.forEach((category) => {
@@ -44,6 +49,7 @@ async function displayCategoriesBtn() {
 }
 
 //***********************GESTION FILTRAGE DES CATEGORIES***********************
+
 async function filterByCategory() {
   const buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
@@ -69,6 +75,7 @@ async function filterByCategory() {
 }
 
 // *******************GESTION DU BOUTON "TOUS" *************************
+
 function toggleTousButtonStyle(selected) {
   const tousButton = document.getElementById('0');
   if (selected) {
@@ -101,6 +108,7 @@ function handleMouseLeave(event) {
 }
 
 // ******************FONCTION D'INITIALISATION***************************
+
 async function initializePage() {
   await getWorks();
   await displayCategoriesBtn();
@@ -115,6 +123,7 @@ async function initializePage() {
 initializePage();
 
 // *********************GESTION CONNEXION/DECONNEXION******************************************
+
 document.addEventListener("DOMContentLoaded", function () {
   const loginLink = document.querySelector('nav ul li:nth-child(3)');
 
@@ -156,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ************************GESTION "MODE EDITION"************************
+
   function addEditModeToHeader() {
     const header = document.querySelector("header");
     const editionModeDiv = createDivWithIcon("fas fa-regular fa-pen-to-square", " Mode édition");
@@ -170,12 +180,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-
   // ************************GESTION DE "MODIFIER"************************
+
   function addEditModeToPortfolio() {
     const portfolioSection = document.getElementById("portfolio");
     const portfolioTitle = portfolioSection.querySelector("h2");
-    const modifierButton = createButtonWithIcon("fas fa-regular fa-pen-to-square", "modifier");
+    const modifierButton = createDivWithIcon("fas fa-regular fa-pen-to-square", "modifier");
+    modifierButton.style.cursor = "pointer";
     portfolioTitle.insertAdjacentElement("beforebegin", modifierButton);
     // ajoute un écouteur d'événement pour ouvrir la modale au clic
     modifierButton.addEventListener("click", () => {
@@ -249,6 +260,7 @@ separationDivGallery.classList.add("separation");
 const buttonModaleGallery = document.createElement("button");
 buttonModaleGallery.classList.add("btnModale");
 buttonModaleGallery.textContent = "Ajouter une photo";
+buttonModaleGallery.style.cursor = "pointer";
 
 // Assemblage de la première modale
 containerModaleGallery.appendChild(spanIconGallery);
@@ -298,6 +310,7 @@ fileIconSpan.appendChild(fileIcon);
 
 const fileLabel = document.createElement("label");
 fileLabel.textContent = "+ Ajouter photo";
+fileLabel.style.cursor = "pointer";
 fileLabel.setAttribute("for", "file");
 
 const fileInput = document.createElement("input");
@@ -331,6 +344,7 @@ const validateButton = document.createElement("button");
 validateButton.classList.add("btnValidate");
 validateButton.textContent = "Valider";
 validateButton.type = "submit";
+validateButton.style.cursor = "pointer";
 
 const separationDiv = document.createElement("div");
 separationDiv.classList.add("separation");
@@ -461,9 +475,8 @@ async function displayGalleryModale() {
 }
 displayGalleryModale();
 
-
-
 // *****************GESTION DELETE DE L'IMAGE DANS LA MODALE 2***********************
+
 async function deleteWork() {
   const trashAll = document.querySelectorAll(".fa-trash-can");
   trashAll.forEach(trash => {
@@ -492,7 +505,6 @@ async function deleteWork() {
   });
 }
 
-
 // Prévisualisation de l'IMG dans modale 2 et écoute des changements sur l'input file
 fileInput.addEventListener("change", function () {
   const file = this.files[0];
@@ -507,7 +519,7 @@ fileInput.addEventListener("change", function () {
       fileIconSpan.style.display = "none";
 
       validateButton.style.backgroundColor = "#1D6154";
-      validateButton.style.border = "1px solid #0E2F28";
+      validateButton.style.border = "1px solid #1D6154";
     });
     reader.readAsDataURL(file);
   }
@@ -569,7 +581,6 @@ async function displayCategorieModal2() {
 }
 displayCategorieModal2()
 
-
 // **************REDIRECTION VERS LA SECTION CONTACT DANS LE LIEN DU LOGIN EN SCROLLING********************
 document.addEventListener("DOMContentLoaded", () => {
   const sectionToScroll = window.location.hash.substring(1);
@@ -584,4 +595,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   }
 });
-
