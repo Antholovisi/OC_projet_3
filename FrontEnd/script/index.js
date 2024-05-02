@@ -10,7 +10,7 @@ async function getWorks() {
   return allWorks;
 }
 
-// *****************AFFICHAGE DYNAMIQUE DES IMAGES DANS LE DOM********************
+// *****************AFFICHAGE DYNAMIQUE DES WORKS DANS LA GALLERIE********************
 async function displayWorks(worksToShow = allWorks) {
   gallery.innerHTML = "";
   worksToShow.forEach((work) => {
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ************************GESTION DE "MODIFIER"************************
-  async function addEditModeToPortfolio() {
+  function addEditModeToPortfolio() {
     const portfolioSection = document.getElementById("portfolio");
     const portfolioTitle = portfolioSection.querySelector("h2");
     const modifierButton = createButtonWithIcon("fas fa-regular fa-pen-to-square", "modifier");
@@ -404,12 +404,12 @@ function hideModal(modalId) {
 
 // Écouteurs d'événements pour les icônes de fermeture des modales
 xmarkIconGallery.addEventListener("click", function () {
-  hideModal("modaleGallery"); // Masque la modale de la galerie
+  hideModal("modaleGallery");
   toggleTousButtonStyle(true);
 });
 
 xmarkIconAdd.addEventListener("click", function () {
-  hideModal("modaleAdd"); // Masque la modale d'ajout
+  hideModal("modaleAdd");
 });
 
 // Écouteurs d'événements pour les boutons qui déclenchent l'ouverture des modales
@@ -418,7 +418,7 @@ buttonModaleGallery.addEventListener("click", function () {
   showModal("modaleAdd");
 });
 
-// Écouteur d'événement pour la modale d'ajout
+// Écouteur d'événement pour la fermeture de la modale d'ajout
 modaleAdd.addEventListener("click", function (event) {
   // Vérifie si l'élément cliqué est en dehors de la modale
   if (!containerModaleAdd.contains(event.target)) {
@@ -429,7 +429,7 @@ modaleAdd.addEventListener("click", function (event) {
   displayWorks();
 });
 
-// Écouteur d'événement pour la modale de la galerie
+// Écouteur d'événement pour la fermeture de la modale de la galerie
 modaleGallery.addEventListener("click", function (event) {
   // Vérifie si l'élément cliqué est en dehors de la modale
   if (!containerModaleGallery.contains(event.target)) {
