@@ -68,11 +68,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
-// *****************************************************************************************************************************************
-
-// Question :
-
-// pourquoi la modale 1 est moins grisée que la modale 2 ?
-
