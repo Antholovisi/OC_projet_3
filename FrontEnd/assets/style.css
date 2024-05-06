@@ -218,7 +218,7 @@ li:hover {
 .edit-btn {
   display: inline-flex;
   align-items: center;
-  margin: 0 5px; /* Ajustez la marge selon vos besoins */
+  margin: 0 5px; 
   text-align: center;
   border: none;
   background: none;
@@ -310,6 +310,10 @@ button {
   border-radius: 60px;
   border: 1px solid #1d6154;
   padding: 10px 20px;
+  &.selected {
+    background-color: #1d6154;
+    color: white;
+  }
 }
 
 button:hover{
