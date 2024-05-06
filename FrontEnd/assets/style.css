@@ -335,7 +335,6 @@ button:hover{
   flex-direction: column;
   align-items: center;
   width: 43%;
-  height: 95%;
   border-radius: 10px;
   background-color:#FFFFFF;
   position: relative;
@@ -377,7 +376,6 @@ button:hover{
   grid-auto-rows: minmax(50px, auto);
   grid-gap: 30px 10px;
   width: 70%;
-  height: 60%;
 }
 
 .galleryModale figure {
@@ -389,7 +387,7 @@ button:hover{
 
 .galleryModale img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -397,8 +395,14 @@ button:hover{
   background-color: #A7A7A7;
   color: white;
   width: 40%;
-  margin-bottom: 40px;
   border: 1px solid #A7A7A7;
+  margin : 0 0 40px 0;
+}
+
+.imagePreviewLoaded {
+  width: 100%; 
+  height: 100%;
+  object-fit: contain;
 }
 
 .btnValidate:hover {
@@ -410,6 +414,7 @@ button:hover{
   background-color: #1d6154;
   color: white;
   width: 40%;
+  margin-bottom: 40px;
 }
 
 .btnModale:hover {
@@ -504,7 +509,7 @@ button:hover{
   align-items: center;
   justify-content: center;
   width: 70%;
-  height: 33%;
+  height: 160px;
   gap: 10px;
   background-color: #E8F1F6;
 }
@@ -561,4 +566,9 @@ button:hover{
 .formAddWork label {
   text-align: left;
   width: 70%;
+}
+
+.active {
+  background-color: #1d6154;
+  color: white;
 }

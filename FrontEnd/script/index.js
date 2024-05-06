@@ -305,11 +305,13 @@ containerFileDiv.classList.add("containerFile");
 
 const fileIconSpan = document.createElement("span");
 const fileIcon = document.createElement("i");
+fileIconSpan.classList.add("fileIcon");
 fileIcon.classList.add("fa-regular", "fa-image");
 fileIconSpan.appendChild(fileIcon);
 
 const fileLabel = document.createElement("label");
 fileLabel.textContent = "+ Ajouter photo";
+fileLabel.classList.add("fileLabel");
 fileLabel.style.cursor = "pointer";
 fileLabel.setAttribute("for", "file");
 
@@ -319,10 +321,12 @@ fileInput.id = "file";
 fileInput.name = "images";
 
 const imagePreview = document.createElement("img");
+imagePreview.className = "imagePreviewLoaded";
 imagePreview.src = "#";
 imagePreview.alt = "Aperçu de l'image";
 
 const maxFileSize = document.createElement("p");
+maxFileSize.classList.add("maxFileSize");
 maxFileSize.textContent = "Jpg, png: 4Mo max";
 
 const titleLabel = document.createElement("label");
@@ -399,24 +403,79 @@ xmarkIconAdd.addEventListener("click", function () {
   hideModal("modaleAdd");
 });
 
-// Écouteurs d'événements pour les boutons qui déclenchent l'ouverture des modales
+//***************************GESTION AU CLIC SUR LE BOUTON "AJOUTER UNE PHOTO"************************** */
 buttonModaleGallery.addEventListener("click", function () {
-  showModal("modaleAdd");
+  // Réinitialise les champs du formulaire et l'image
+  const titleInput = document.getElementById("title");
+  const categorySelect = document.getElementById("category");
+  const fileInput = document.getElementById("file");
+  const fileLabel = document.querySelector(".fileLabel");
+  const fileIconSpan = document.querySelector(".fileIcon");
+  const maxFileSize = document.querySelector(".maxFileSize");
+  const validateButton = document.querySelector(".btnValidate");
+  const containerFileDiv = document.querySelector(".containerFile");
+  const imagePreview = document.querySelector(".imagePreviewLoaded");
+  const faRegular = document.querySelector(".fa-regular .fa-image");
+  // Supprimer l'ancien aperçu de l'image, s'il existe
+  let oldPreview = document.getElementById("imagePreview");
+  if (oldPreview) {
+    oldPreview.remove();
+  }
+  if (fileLabel) {
+    fileLabel.style.display = "block";
+  }
+  if (imagePreview) {
+    imagePreview.style.display = "none";
+    // Crée un nouvel aperçu d'image
+    const newPreview = document.createElement("img");
+    newPreview.id = "imagePreview";
+    newPreview.style.display = "none";
+    containerFileDiv.appendChild(newPreview);
+
+    // Réinitialise les valeurs des champs
+    if (titleInput) {
+      titleInput.value = "";
+    }
+    if (faRegular) {
+      faRegular.style.display = "block";
+    }
+    if (categorySelect) {
+      categorySelect.value = "";
+    }
+    if (fileInput) {
+      fileInput.value = "";
+      fileInput.style.display = "none";
+    }
+    // Réinitialiser les états visuels des autres éléments
+    if (fileIconSpan) {
+      fileIconSpan.style.display = "block";
+    }
+    if (maxFileSize) {
+      maxFileSize.style.display = "block";
+    }
+    if (validateButton) {
+      validateButton.style.backgroundColor = "";
+      validateButton.style.border = "";
+    }
+    // Masque la modale de galerie et affiche la modale de formulaire
+    hideModal("modaleGallery");
+    showModal("modaleAdd");
+  }
 });
 
-// Fonction pour afficher une modale
+// ***********************AFFICHER UNE MODALE***********************
 function showModal(modalId) {
   const modale = document.getElementById(modalId);
   modale.style.display = "flex";
 }
 
-// Fonction pour masquer une modale
+// ***********************MASQUER UNE MODALE***********************
 function hideModal(modalId) {
   const modale = document.getElementById(modalId);
   modale.style.display = "none";
 }
 
-// Écouteurs d'événements pour les icônes de fermeture des modales
+//// ***********************GESTION XMARK*******************************
 xmarkIconGallery.addEventListener("click", function () {
   hideModal("modaleGallery");
   toggleTousButtonStyle(true);
@@ -426,13 +485,7 @@ xmarkIconAdd.addEventListener("click", function () {
   hideModal("modaleAdd");
 });
 
-// Écouteurs d'événements pour les boutons qui déclenchent l'ouverture des modales
-buttonModaleGallery.addEventListener("click", function () {
-  hideModal("modaleGallery");
-  showModal("modaleAdd");
-});
-
-// Écouteur d'événement pour la fermeture de la modale d'ajout
+// // ***********************FERMETURE AU CLIC EN DEHORS MODALE AJOUT*******************************
 modaleAdd.addEventListener("click", function (event) {
   // Vérifie si l'élément cliqué est en dehors de la modale
   if (!containerModaleAdd.contains(event.target)) {
@@ -443,7 +496,7 @@ modaleAdd.addEventListener("click", function (event) {
   displayWorks();
 });
 
-// Écouteur d'événement pour la fermeture de la modale de la galerie
+// ***********************FERMETURE AU CLIC EN DEHORS MODALE GALLERIE******************************
 modaleGallery.addEventListener("click", function (event) {
   // Vérifie si l'élément cliqué est en dehors de la modale
   if (!containerModaleGallery.contains(event.target)) {
@@ -453,8 +506,7 @@ modaleGallery.addEventListener("click", function (event) {
   displayWorks();
 });
 
-// *****************GESTION AFFICHAGE DE LA GALLERIE DANS MODALE 1********************
-
+// *****************GESTION AFFICHAGE DE LA GALLERIE DANS MODALE 1***********************
 async function displayGalleryModale() {
   galleryModale.innerHTML = "";
   const gallery = await getWorks();
@@ -526,6 +578,7 @@ fileInput.addEventListener("change", function () {
 })
 
 // *****************GESTION DU POST**************************
+
 formAddWork.addEventListener("submit", async function (event) {
   event.preventDefault();
   const formData = new FormData();
