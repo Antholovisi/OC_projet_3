@@ -39,9 +39,15 @@ async function getCategories() {
 // *************************GESTION DYNAMIQUE DES CATEGORIES***********************
 
 async function displayCategoriesBtn() {
+  const buttonAll = document.createElement("button");
+  buttonAll.classList = "button-filters";
+  buttonAll.textContent = "Tous";
+  buttonAll.id = "0";
+  filtersContainer.appendChild(buttonAll);
   const arrayCategories = await getCategories();
   arrayCategories.forEach((category) => {
     const button = document.createElement("button");
+    button.classList = "button-filters";
     button.textContent = category.name;
     button.id = category.id;
     filtersContainer.appendChild(button);
@@ -50,9 +56,12 @@ async function displayCategoriesBtn() {
 
 //***********************GESTION FILTRAGE DES CATEGORIES***********************
 
-async function filterByCategory() {
-  const buttons = document.querySelectorAll("button");
+async function initFilterButtons() {
+  const buttons = document.querySelectorAll(".button-filters");
   buttons.forEach((button) => {
+    if (button.id === "0") {
+      buttonSelected(button);
+    }
     button.addEventListener("click", (event) => {
       let galleryFiltered;
       const buttonId = event.target.id;
@@ -60,51 +69,37 @@ async function filterByCategory() {
         galleryFiltered = allWorks.filter((work) => {
           return work.category.id === parseInt(buttonId);
         });
-        // Applique le style normal au bouton "Tous"
-        toggleTousButtonStyle(false);
       } else {
         // Si le bouton "Tous" est cliqué, afficher toutes les oeuvres
         galleryFiltered = allWorks;
-        // Appliquer le style spécial au bouton "Tous"
-        toggleTousButtonStyle(true);
       }
+      handleActiveButton(button);
       // Afficher les oeuvres filtrées ou toutes les oeuvres
       displayWorks(galleryFiltered);
     });
   });
 }
 
+async function handleActiveButton(activeButton) {
+  const buttons = document.querySelectorAll(".button-filters");
+  buttons.forEach((button) => {
+    if (activeButton === button) {
+      buttonSelected(button);
+    }
+    else {
+      buttonUnselected(button);
+    }
+  });
+}
 // *******************GESTION DU BOUTON "TOUS" *************************
 
-function toggleTousButtonStyle(selected) {
-  const tousButton = document.getElementById('0');
-  if (selected) {
-    // Supprime la classe lorsque le bouton est sélectionné
-    tousButton.classList.remove('not-selected');
-    tousButton.style.backgroundColor = '#1d6154';
-    tousButton.style.color = 'white';
-    // Supprimer les gestionnaires d'événements hover lorsque le bouton est sélectionné
-    tousButton.removeEventListener('mouseenter', handleMouseEnter);
-    tousButton.removeEventListener('mouseleave', handleMouseLeave);
-  } else {
-    // Ajoute la classe lorsque le bouton n'est pas sélectionné
-    tousButton.classList.add('not-selected');
-    tousButton.style.backgroundColor = 'white';
-    tousButton.style.color = '#1d6154';
-    // Ajouter les gestionnaires d'événements hover lorsque le bouton n'est pas sélectionné
-    tousButton.addEventListener('mouseenter', handleMouseEnter);
-    tousButton.addEventListener('mouseleave', handleMouseLeave);
-  }
+
+function buttonSelected(element) {
+  element.classList.add("selected");
 }
-// Gestionnaire d'événement pour le survol (mouseenter)
-function handleMouseEnter(event) {
-  event.target.style.backgroundColor = '#1d6154';
-  event.target.style.color = 'white';
-}
-// Gestionnaire d'événement pour la sortie du survol (mouseleave)
-function handleMouseLeave(event) {
-  event.target.style.backgroundColor = 'white';
-  event.target.style.color = '#1d6154';
+
+function buttonUnselected(element) {
+  element.classList.remove("selected");
 }
 
 // ******************FONCTION D'INITIALISATION***************************
@@ -112,12 +107,8 @@ function handleMouseLeave(event) {
 async function initializePage() {
   await getWorks();
   await displayCategoriesBtn();
-  await filterByCategory();
+  await initFilterButtons();
   await displayWorks();
-  // Ajoute la classe "not-selected" au bouton "Tous" par défaut
-  const tousButton = document.getElementById('0');
-  tousButton.classList.add('not-selected');
-  toggleTousButtonStyle(true);
 }
 // Appel de la fonction d'initialisation au chargement de la page
 initializePage();
@@ -478,7 +469,7 @@ function hideModal(modalId) {
 //// ***********************GESTION XMARK*******************************
 xmarkIconGallery.addEventListener("click", function () {
   hideModal("modaleGallery");
-  toggleTousButtonStyle(true);
+  handleActiveButton(document.getElementById("0"));
 });
 
 xmarkIconAdd.addEventListener("click", function () {
@@ -492,7 +483,7 @@ modaleAdd.addEventListener("click", function (event) {
     modaleAdd.style.display = "none";
     modaleGallery.style.display = "none";
   }
-  toggleTousButtonStyle(true);
+  handleActiveButton(document.getElementById("0"));
   displayWorks();
 });
 
@@ -502,7 +493,7 @@ modaleGallery.addEventListener("click", function (event) {
   if (!containerModaleGallery.contains(event.target)) {
     modaleGallery.style.display = "none";
   }
-  toggleTousButtonStyle(true);
+  handleActiveButton(document.getElementById("0"));
   displayWorks();
 });
 
@@ -569,7 +560,7 @@ fileInput.addEventListener("change", function () {
       maxFileSize.style.display = "none";
       fileInput.style.display = "none";
       fileIconSpan.style.display = "none";
-
+      validateButton.style.color = "white";
       validateButton.style.backgroundColor = "#1D6154";
       validateButton.style.border = "1px solid #1D6154";
     });
