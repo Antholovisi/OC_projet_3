@@ -70,11 +70,11 @@ async function initFilterButtons() {
           return work.category.id === parseInt(buttonId);
         });
       } else {
-        // Si le bouton "Tous" est cliqué, afficher toutes les oeuvres
+        // Si le bouton "Tous" est cliqué, affiche toutes les oeuvres
         galleryFiltered = allWorks;
       }
       handleActiveButton(button);
-      // Afficher les oeuvres filtrées ou toutes les oeuvres
+      // Affiche les oeuvres filtrées ou toutes les oeuvres
       displayWorks(galleryFiltered);
     });
   });
@@ -91,8 +91,8 @@ async function handleActiveButton(activeButton) {
     }
   });
 }
-// *******************GESTION DU BOUTON "TOUS" *************************
 
+// *******************GESTION DU BOUTON "TOUS" *************************
 
 function buttonSelected(element) {
   element.classList.add("selected");
@@ -167,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ajoute un écouteur d'événement pour ouvrir la modale au clic
     editionModeDiv.addEventListener("click", () => {
       displayModal();
-      displayGalleryModale();
     });
   }
 
@@ -186,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// CREATION DIV WITH ICON
+// Création d'un div avec une icône
 function createDivWithIcon(iconClass, text) {
   const div = document.createElement("div");
   const icon = document.createElement("i");
@@ -196,7 +195,7 @@ function createDivWithIcon(iconClass, text) {
   return div;
 }
 
-// CREATION BUTTON WITH ICON
+// Création d'un bouton avec une icône
 function createButtonWithIcon(iconClass, text) {
   const button = document.createElement("button");
   const icon = document.createElement("i");
@@ -206,7 +205,7 @@ function createButtonWithIcon(iconClass, text) {
   return button;
 }
 
-// DISPLAY MODAL FUNCTION
+// Fonction d'affichage de la modale
 function displayModal() {
   const modal = document.querySelector(".modale");
   if (modal) {
@@ -214,7 +213,7 @@ function displayModal() {
   }
 }
 
-// HIDE MODAL FUNCTION
+// Fonction de masquage de la modale
 function hideModal() {
   const modal = document.querySelector(".modale");
   if (modal) {
@@ -380,11 +379,6 @@ leftArrowIcon.addEventListener("click", function () {
   modaleAdd.style.display = "none";
 });
 
-// Fonction pour afficher la modale d'ajout
-function showModalAdd() {
-  modaleAdd.style.display = "flex";
-}
-
 // Écouteurs d'événements pour les icônes de fermeture
 xmarkIconGallery.addEventListener("click", function () {
   hideModal("modaleGallery");
@@ -393,6 +387,11 @@ xmarkIconGallery.addEventListener("click", function () {
 xmarkIconAdd.addEventListener("click", function () {
   hideModal("modaleAdd");
 });
+
+// Fonction pour afficher la modale d'ajout
+function showModalAdd() {
+  modaleAdd.style.display = "flex";
+}
 
 //***************************GESTION AU CLIC SUR LE BOUTON "AJOUTER UNE PHOTO"************************** */
 buttonModaleGallery.addEventListener("click", function () {
@@ -469,7 +468,6 @@ function hideModal(modalId) {
 //// ***********************GESTION XMARK*******************************
 xmarkIconGallery.addEventListener("click", function () {
   hideModal("modaleGallery");
-  handleActiveButton(document.getElementById("0"));
 });
 
 xmarkIconAdd.addEventListener("click", function () {
@@ -483,7 +481,6 @@ modaleAdd.addEventListener("click", function (event) {
     modaleAdd.style.display = "none";
     modaleGallery.style.display = "none";
   }
-  handleActiveButton(document.getElementById("0"));
   displayWorks();
 });
 
@@ -573,12 +570,12 @@ fileInput.addEventListener("change", function () {
 formAddWork.addEventListener("submit", async function (event) {
   event.preventDefault();
   const formData = new FormData();
-  // Vérifier si tous les champs requis sont remplis
+  // Vérifie si tous les champs requis sont remplis
   if (titleInput.value === "" || categorySelect.value === "" || fileInput.files.length === 0) {
     alert("Veuillez remplir tous les champs requis et ajouter une image.");
     return;
   }
-  // Ajouter les données du formulaire à formData
+  // Ajoute les données du formulaire à formData
   formData.append('title', titleInput.value);
   formData.append('category', categorySelect.value);
   formData.append('image', fileInput.files[0]);
@@ -598,7 +595,7 @@ formAddWork.addEventListener("submit", async function (event) {
       modaleGallery.style.display = "flex";
       displayGalleryModale();
       console.log('La requête POST a réussi');
-      // Masquer complètement la modale principale
+      // Masque complètement la modale principale
 
     } else {
       console.log('La requête POST a échoué', response.status, response.statusText);
@@ -608,7 +605,7 @@ formAddWork.addEventListener("submit", async function (event) {
   }
 });
 
-// Création de la liste catégorie dynamique dans l'input select de la modale2 de post
+// Création de la liste catégorie dynamique dans l'input select de la modale 2
 async function displayCategorieModal2() {
   const select = document.querySelector("#category");
   const defaultOption = document.createElement("option");
