@@ -515,7 +515,7 @@ async function displayGalleryModale() {
 }
 displayGalleryModale();
 
-// *****************GESTION DELETE DE L'IMAGE DANS LA MODALE 2***********************
+// *****************GESTION DELETE DE L'IMAGE DANS LA MODALE 1***********************
 
 async function deleteWork() {
   const trashAll = document.querySelectorAll(".fa-trash-can");
@@ -543,6 +543,7 @@ async function deleteWork() {
       }
     });
   });
+  displayWorks();
 }
 
 // Prévisualisation de l'IMG dans modale 2 et écoute des changements sur l'input file
@@ -603,6 +604,7 @@ formAddWork.addEventListener("submit", async function (event) {
   } catch (error) {
     console.error("Erreur pendant la requête POST", error);
   }
+  displayWorks();
 });
 
 // Création de la liste catégorie dynamique dans l'input select de la modale 2
