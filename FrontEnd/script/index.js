@@ -195,16 +195,6 @@ function createDivWithIcon(iconClass, text) {
   return div;
 }
 
-// Création d'un bouton avec une icône
-function createButtonWithIcon(iconClass, text) {
-  const button = document.createElement("button");
-  const icon = document.createElement("i");
-  icon.className = iconClass;
-  button.appendChild(icon);
-  button.appendChild(document.createTextNode(text));
-  return button;
-}
-
 // Fonction d'affichage de la modale
 function displayModal() {
   const modal = document.querySelector(".modale");
@@ -378,20 +368,6 @@ leftArrowIcon.addEventListener("click", function () {
   showModal("modaleGallery");
   modaleAdd.style.display = "none";
 });
-
-// Écouteurs d'événements pour les icônes de fermeture
-xmarkIconGallery.addEventListener("click", function () {
-  hideModal("modaleGallery");
-});
-
-xmarkIconAdd.addEventListener("click", function () {
-  hideModal("modaleAdd");
-});
-
-// Fonction pour afficher la modale d'ajout
-function showModalAdd() {
-  modaleAdd.style.display = "flex";
-}
 
 //***************************GESTION AU CLIC SUR LE BOUTON "AJOUTER UNE PHOTO"************************** */
 buttonModaleGallery.addEventListener("click", function () {
